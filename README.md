@@ -3,10 +3,10 @@
 ## Descrição
 
 ## Estrutura dos Arquivos
-O arquivo 'jogo-da-vida.c' contém o código da versão paralela do programa do jogo da vida, desenvolvido com a biblioteca MPI.
+O arquivo `jogo-da-vida.c` contém o código da versão paralela do programa do jogo da vida, desenvolvido com a biblioteca MPI.
 
 É necessário ter o pacote `mpich` instalado.
-> No Ubuntu: $ sudo apt-get install mpich
+> No Ubuntu/Linux Mint: $ sudo apt-get install mpich
 
 Para compilar o código usa-se o comando `mpicc jogo-da-vida.c -o jogo-da-vida`.
 
