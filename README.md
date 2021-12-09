@@ -8,15 +8,16 @@ Implementação de uma versão paralela do jogo da vida em linguagem C, utilizan
 ## Estrutura dos Arquivos
 O arquivo `jogo-da-vida.c` contém o código da versão paralela do programa do jogo da vida, desenvolvido com a biblioteca MPI.
 
-É necessário ter o pacote `mpich` instalado.
+É necessário ter o pacote `mpich` instalado na máquina para fazer a compilação e execução.
 > No Ubuntu/Linux Mint: $ sudo apt-get install mpich
 
 Para compilar o código usa-se o comando `mpicc -O3 jogo-da-vida.c -o jogo-da-vida`.
+> -O3: Opção de otimização nível 3 para o compilador gcc
 
 Para executar o programa compilado, usa-se `mpiexec -np 4 ./jogo-da-vida`. 
-> -np: número de processos
+> -np: Número de processos
 
-O número de processos sempre deve ser um a mais do que o número esperado para executar a simulção. Isso porque um dos processos não participa do processamento do jogo da vida e serve apenas para agregar os resultados parciais produzidos pelos outros processos. Portanto, para executar o programa como, por exemplo, 4 processos em paralelo, é preciso usar o argumento `-np 5`, onde são empregados 5 processos: 4 deles para executar a simulação do jogo da vida e 1 para reunir e exibir os resultados.
+**Importante**: O número de processos sempre deve ser um a mais do que o número esperado para executar a simulção. Isso porque um dos processos não participa do processamento do jogo da vida e serve apenas para agregar os resultados parciais produzidos pelos outros processos. Portanto, para executar o programa como, por exemplo, 4 processos em paralelo, é preciso usar o argumento `-np 5`, onde são empregados 5 processos: 4 deles para executar a simulação do jogo da vida e 1 para reunir e exibir os resultados.
 
 ## Resultados
 
