@@ -23,11 +23,11 @@ Para executar o programa compilado, usa-se `mpiexec -np 4 ./jogo-da-vida`.
 Todos os testes foram feitos em uma máquina com as seguintes configurações:
 
 * Processador AMD Ryzen 5 5600X (6 núcleos reais e 12 threads com *Simultaneous Multithreading* - SMT);
-* 16 GB de memória RAM DDR4; e
+* 16 GB de memória RAM DDR4;
 * Sistema Operacional Linux Mint 20.2 Cinnamon;
-* Compilador GCC versão 9.3.0.
-* Pacote `mpich` versão 3.2.2-2build1.
+* Compilador GCC versão 9.3.0; e
+* Pacote mpich versão 3.2.2-2 build 1.
 
-Os resultados e uma comparação com uma implementação OpenMP do jogo da vida, em termos de tempos de execução, *speedup* e eficiência, estão disponíveis [nesta tabela](https://docs.google.com/spreadsheets/d/1P5irgyL75FzMT8lc6uDxMPpiI4kLS472xhsHGUy-6-g/edit?usp=sharing).
+Os resultados e uma comparação com uma implementação em OpenMP do jogo da vida, em termos de tempos de execução, *speedup* e eficiência, estão disponíveis [nesta tabela](https://docs.google.com/spreadsheets/d/1P5irgyL75FzMT8lc6uDxMPpiI4kLS472xhsHGUy-6-g/edit?usp=sharing).
 
 O vídeo explicativo com apresentação do trabalho e demonstração de funcionamento está disponível [neste link](https://drive.google.com/file/d/1rSTXhJhExcR-xfVIdphZmaSmazEYFAf4/view?usp=sharing).
