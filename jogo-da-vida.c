@@ -2,9 +2,9 @@
  * Entrega 3
  * Jogo da vida em MPI */
 
-#include <mpi.h>
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
+#include <mpi.h>
 
 #define ALIVE 1
 #define DEAD 0
@@ -50,6 +50,8 @@ void startGrid(int** grid, int size, int N, int li, int lf){
 	insertCell(grid, lin+2, col+1, li, lf);
 }
 
+/* Recebe um grid NxN.
+ * Retorna o numero de vizinhos vivos de (i, j). */
 int getNeighbors(int** grid, int i, int j, int N){
 	int up, down, left, right, count;
 
@@ -73,6 +75,8 @@ int getNeighbors(int** grid, int i, int j, int N){
 	return count;
 }
 
+/* Recebe um grid (size+2)xN.
+ * Simula uma geracao atualizando as celular de newgrid de mesma dimensao. */
 void simulate(int** grid, int** newgrid, int size, int N){
 	int i, j, neighbors;
 
@@ -102,6 +106,8 @@ void simulate(int** grid, int** newgrid, int size, int N){
 	}
 }
 
+/* Recebe um grid (size+2)xN.
+ * Retorna o numero de celulas vivas entre as linhas 1 e size; */
 int countAlive(int** grid, int size, int N){
 	int i, j, count;
 
@@ -186,8 +192,11 @@ int main(int argc, char** argv){
 	MPI_Barrier(MPI_COMM_WORLD);
 
 	// inicia a contagem do tempo
-	if(pid == master)
+	if(pid == master){
+		printf("\nIniciando simulacao...\n\n");
+
 		start = MPI_Wtime();
+	}
 
 	// Realiza a simulacao para G geracoes
 	// Alterna a posicao de grid e newgrid nas chamadas
@@ -259,19 +268,21 @@ int main(int argc, char** argv){
 				MPI_Recv(&alive, 1, MPI_INT, j, 4, MPI_COMM_WORLD, &status);
 				soma += alive;
 			}
-			printf("Geracao [%d]\t %d celulas vivas\n", i, soma);
+			printf("Geracao [%d]\t %d celulas vivas\n", i+1, soma);
 		}
-
 		// espera todos os processos terminarem a contagem
 		MPI_Barrier(MPI_COMM_WORLD);
 	}
 
 	// termina a contagem do tempo
-	if(pid == master)
+	if(pid == master){
 		finish = MPI_Wtime();
 
+		printf("\nSimulacao Finalizada.\n\n");
+	}
+
+	// libera as matrizes
 	if(pid < master){
-		// libera as matrizes
 		for(i = 0; i < size + 2 ; i++){
 			free(grid[i]);
 			free(newgrid[i]);
@@ -282,8 +293,9 @@ int main(int argc, char** argv){
 		newgrid = NULL;
 	}
 
+	// exibe o tempo de execucao
 	if(pid == master)
-		printf("\nTempo total = %.14lf segundos.\n", finish-start);
+		printf("\nTempo de simulacao = %.14lf segundos.\n", finish-start);
 
 	// Finaliza os processos
 	MPI_Finalize();
